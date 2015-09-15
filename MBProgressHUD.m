@@ -117,6 +117,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 @synthesize detailsLabelText;
 @synthesize progress;
 @synthesize size;
+@synthesize padding;
+
 #if NS_BLOCKS_AVAILABLE
 @synthesize completionBlock;
 #endif
@@ -196,6 +198,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		self.removeFromSuperViewOnHide = NO;
 		self.minSize = CGSizeZero;
 		self.square = NO;
+        self.padding = kPadding;
 		self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin 
 								| UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 
@@ -540,16 +543,16 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	totalSize.width = MAX(totalSize.width, labelSize.width);
 	totalSize.height += labelSize.height;
 	if (labelSize.height > 0.f && indicatorF.size.height > 0.f) {
-		totalSize.height += kPadding;
+		totalSize.height += self.padding;
 	}
 
-	CGFloat remainingHeight = bounds.size.height - totalSize.height - kPadding - 4 * margin; 
+	CGFloat remainingHeight = bounds.size.height - totalSize.height - self.padding - 4 * margin;
 	CGSize maxSize = CGSizeMake(maxWidth, remainingHeight);
 	CGSize detailsLabelSize = MB_MULTILINE_TEXTSIZE(detailsLabel.text, detailsLabel.font, maxSize, detailsLabel.lineBreakMode);
 	totalSize.width = MAX(totalSize.width, detailsLabelSize.width);
 	totalSize.height += detailsLabelSize.height;
 	if (detailsLabelSize.height > 0.f && (indicatorF.size.height > 0.f || labelSize.height > 0.f)) {
-		totalSize.height += kPadding;
+		totalSize.height += self.padding;
 	}
 	
 	totalSize.width += 2 * margin;
@@ -564,7 +567,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	yPos += indicatorF.size.height;
 	
 	if (labelSize.height > 0.f && indicatorF.size.height > 0.f) {
-		yPos += kPadding;
+		yPos += self.padding;
 	}
 	CGRect labelF;
 	labelF.origin.y = yPos;
@@ -574,7 +577,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	yPos += labelF.size.height;
 	
 	if (detailsLabelSize.height > 0.f && (indicatorF.size.height > 0.f || labelSize.height > 0.f)) {
-		yPos += kPadding;
+		yPos += self.padding;
 	}
 	CGRect detailsLabelF;
 	detailsLabelF.origin.y = yPos;

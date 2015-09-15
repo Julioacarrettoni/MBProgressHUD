@@ -424,6 +424,12 @@ typedef void (^MBProgressHUDCompletionBlock)();
  */
 @property (assign, getter = isSquare) BOOL square;
 
+/**
+ * Padding
+ * Defaults to kPadding value
+ */
+@property (nonatomic, assign) float padding;
+
 @end
 
 
